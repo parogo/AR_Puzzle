@@ -115,6 +115,7 @@ function Footer(){
                   href={item.href}
                   className="text-gray-400 hover:text-gray-500"
                 >
+
                   <span className="sr-only">{item.name}</span>
                   <item.icon className="h-6 w-6" aria-hidden="true" />
                 </a>
@@ -123,11 +124,12 @@ function Footer(){
           </div>
           <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
+              {/*  */}
               <div>
                 <h3 className="text-base font-medium text-gray-900">
                   Solutions
                 </h3>
-                <ul role="list" className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4">
                   {navigation.solutions.map((item) => (
                     <li key={item.name}>
                       <a
@@ -140,9 +142,10 @@ function Footer(){
                   ))}
                 </ul>
               </div>
+              {/*  */}
               <div className="mt-12 md:mt-0">
                 <h3 className="text-base font-medium text-gray-900">Support</h3>
-                <ul role="list" className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
                       <a
@@ -156,10 +159,11 @@ function Footer(){
                 </ul>
               </div>
             </div>
+            {/*  */}
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-base font-medium text-gray-900">Company</h3>
-                <ul role="list" className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
                       <a
@@ -172,9 +176,10 @@ function Footer(){
                   ))}
                 </ul>
               </div>
+              {/*  */}
               <div className="mt-12 md:mt-0">
                 <h3 className="text-base font-medium text-gray-900">Legal</h3>
-                <ul role="list" className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
                       <a

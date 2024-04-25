@@ -35,7 +35,6 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
 
 
 # Application definition
-
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

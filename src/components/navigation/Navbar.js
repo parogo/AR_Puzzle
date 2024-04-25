@@ -6,11 +6,12 @@ function Navbar(){
     return (
         <nav className='w-full py-2 shadow-md fixed'>
             <div className="bg-white px-4 sm:px-6">
-            <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap md:px-14 px:2">
-                <div className="ml-4 mt-2">
-                    {/* LOGO */}
-                    <img src={logo_letras_AR_Puzzle} width={350} height={120} className=""></img>
-                </div>
+                <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap md:px-14 px:2">
+                    <div className="ml-4 mt-2">
+                        {/* LOGO */}
+                        <img src={logo_letras_AR_Puzzle} width={350} height={120} className="" alt="Logo"></img>
+                    </div>
+                    
                     {/* Enlaces menú superior */}
                     <div className="ml-4 mt-2 flex-shrink-0">
                     <Link to='/AR_Puzzle' className="text-lg inline-flex font-medium leading-6 text-gray-900 mx-4 hover:underline hover:underline-offset-2">AR Puzzle</Link>
@@ -26,8 +27,8 @@ function Navbar(){
                     >
                         Iniciar sesión
                     </button>
+                    </div>
                 </div>
-            </div>
             </div>
         </nav>
        
