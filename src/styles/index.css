@@ -1,3 +1,97 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  z-index: -1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d8d8d8;
+  opacity: 10px;
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb:hover {
+  background: #c9c9c9;
+  opacity: 10px;
+  border-radius: 10px;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+article {
+  position: relative;
+  width: 200px;
+  transition: all 0.3s ease;
+}
+
+article img:first-child {
+  box-shadow: 0 0 60px 0 rgba(0, 30, 255, 0.5);
+  border-radius: 12px;
+  width: 100%;
+  opacity: 1;
+}
+
+article img:last-child {
+  position: absolute;
+  width: 400px;
+  border-radius: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: translateY(25%);
+  transition: 0.3s ease;
+  opacity: 0;
+}
+
+article:hover {
+  transform: perspective(250px) rotateX(10deg) translateY(-5%) translateZ(0);
+}
+
+article::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    to-bottom,
+    transparent 10%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0) 95%
+  );
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+article:hover::before {
+  opacity: 1;
+}
+
+article:hover img:first-child {
+  opacity: 0.5;
+  transition: 0.3s ease;
+}
+
+article:hover img:last-child {
+  opacity: 1;
+  transform: translateY(-15%);
+}

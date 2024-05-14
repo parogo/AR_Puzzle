@@ -1,5 +1,6 @@
 import Layout from "hocs/layouts/Layout";
-function Contacto() {
+
+function Descarga() {
   return (
     <Layout>
       <div className="bg-black bg-dot-white/[0.25] relative flex flex-col items-center justify-center">
@@ -84,4 +85,4 @@ function Contacto() {
   );
 }
 
-export default Contacto;
+export default Descarga;

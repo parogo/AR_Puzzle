@@ -3,19 +3,38 @@ import store from './store';
 import { Provider } from "react-redux";
 
 import Error404 from "containers/errors/Error404";
-import Home from "containers/pages/Home";
+import ArPuzzleHome from "containers/pages/ArPuzzleHome";
+import Comunidad from "containers/pages/Comunidad";
+import RoadMap from "containers/pages/RoadMap";
+import Foro from "containers/pages/Foro";
+import Contacto from "containers/pages/Contacto";
+import Descarga from "containers/pages/Descarga";
+
+import Navbar from "components/navigation/Navbar";
+import Footer from "components/navigation/Footer";
+
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Routes>
-          {/* Error displayk, si no existe*/}
-          <Route path="*" element={<Error404/>}/>
+      <div className="bg-gradient-to-b from-black to-black-bg app-container -z-100"> {/* Agrega esta clase para controlar el layout principal */}
+        <Navbar />
+          <Routes>
+            {/* Error displayk, si no existe*/}
+            <Route path="*" element={<Error404/>}/>
 
-          {/* Ruta Home */}
-          <Route path="/" element={<Home/>}/>
-        </Routes> 
+            {/* Ruta Home */}
+            <Route path="/" element={<ArPuzzleHome/>}/>
+            <Route path="/Comunidad" element={<Comunidad/>}/>
+            <Route path="/Desarrollo_Futuro" element={<RoadMap/>}/>
+            <Route path="/Foro" element={<Foro/>}/>
+            <Route path="/Contacto" element={<Contacto/>}/>
+            <Route path="/Descarga" element={<Descarga/>}/>
+
+          </Routes> 
+          <Footer />
+        </div>
       </Router>
     </Provider>
   );

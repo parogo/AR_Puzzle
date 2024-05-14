@@ -1,19 +1,12 @@
-import Layout from "hocs/layouts/Layout";
-function Contacto() {
-  return (
-    <Layout>
-      <div className="bg-black bg-dot-white/[0.25] relative flex flex-col items-center justify-center">
-        {/* Radial gradient for the container to give a faded look */}
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-
+<main>
         <div className="relative px-6 lg:px-8">
           <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
             <div>
               <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                 <div className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                   <span className="text-gray-600">
-                    Announcing our next round of funding.{" "}
-                    <a href="/" className="font-semibold text-orange-600">
+                    Announcing our next round of funding.{' '}
+                    <a href="#" className="font-semibold text-indigo-600">
                       <span className="absolute inset-0" aria-hidden="true" />
                       Read more <span aria-hidden="true">&rarr;</span>
                     </a>
@@ -21,26 +14,25 @@ function Contacto() {
                 </div>
               </div>
               <div>
-                <h1 className="text-4xl text-white font-bold tracking-tight sm:text-center sm:text-6xl">
+                <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
                   Data to enrich your online business
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                  occaecat fugiat aliqua.
+                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
+                  amet fugiat veniam occaecat fugiat aliqua.
                 </p>
                 <div className="mt-8 flex gap-x-4 sm:justify-center">
                   <a
-                    href="/"
-                    className="inline-block rounded-lg bg-orange-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-orange-600 hover:bg-orange-700 hover:ring-orange-700"
+                    href="#"
+                    className="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
                   >
                     Get started
-                    <span className="text-orange-200" aria-hidden="true">
+                    <span className="text-indigo-200" aria-hidden="true">
                       &rarr;
                     </span>
                   </a>
                   <a
-                    href="/"
+                    href="#"
                     className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
                   >
                     Live demo
@@ -55,6 +47,7 @@ function Contacto() {
                   className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
                   viewBox="0 0 1155 678"
                   fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
@@ -79,9 +72,4 @@ function Contacto() {
             </div>
           </div>
         </div>
-      </div>
-    </Layout>
-  );
-}
-
-export default Contacto;
+      </main>

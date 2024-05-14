@@ -1,12 +1,45 @@
 import Layout from "hocs/layouts/Layout";
-function Contacto() {
+import React, { useState } from "react";
+import qr_code_mapa from "assets/img/qr_code_mapa.png";
+import mapa_juego from "assets/img/mapa_juego.png";
+
+function ArPuzzleHome() {
+  const [hover, setHover] = useState(false); // Definiendo el estado hover y la función setHover
   return (
     <Layout>
       <div className="bg-black bg-dot-white/[0.25] relative flex flex-col items-center justify-center">
         {/* Radial gradient for the container to give a faded look */}
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]"></div>
 
-        <div className="relative px-6 lg:px-8">
+        {/* <div className="relative px-8 lg:px-12"> */}
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          {/* Primera fila */}
+          <div className="py-12 grid grid-cols-1 md:grid-cols-2 justify-items-center items-center gap-6 md:gap-0">
+            <div>
+              <p className="text-lg text-white block">
+                <span className="font-semibold text-3xl text-boton-naranja text-center block">
+                  REALIDAD AUMENTADA
+                </span>
+                <br></br>
+                La realidad aumentada (AR) permite superponer información
+                digital en el mundo real a través de dispositivos, mejorando así
+                la interacción de los usuarios con el entorno mediante el uso de
+                imágenes y sonidos generados por computadora.
+              </p>
+            </div>
+            <article className="block">
+              <img src={qr_code_mapa} alt="QR Code" className="w-full h-auto" />
+              <img
+                src={mapa_juego}
+                alt="Mapa del juego"
+                className="w-full h-auto"
+              />
+            </article>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="relative px-6 lg:px-8">
           <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
             <div>
               <div className="hidden sm:mb-8 sm:flex sm:justify-center">
@@ -78,10 +111,10 @@ function Contacto() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </Layout>
   );
 }
 
-export default Contacto;
+export default ArPuzzleHome;
