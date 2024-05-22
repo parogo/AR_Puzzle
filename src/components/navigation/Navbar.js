@@ -136,7 +136,7 @@ function Navbar() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-6"
                     >
-                    <Disclosure.Panel className="lg:hidden -z-10">
+                    <Disclosure.Panel className="lg:hidden absolute w-full bg-black-bg">
                     {/* El close para poder llamarlo y cerrar el menú a voluntad */}
                     {({ close }) => (
                         <div className="space-y-1 px-2 pb-3 pt-2">

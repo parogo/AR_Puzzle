@@ -41,6 +41,7 @@ module.exports =
   },
   plugins: 
   [
+    require('daisyui'),
     function ({addUtilities}) 
     {
       const extendUnderline = 
