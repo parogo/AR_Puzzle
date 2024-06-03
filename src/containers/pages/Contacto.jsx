@@ -1,82 +1,122 @@
-import Layout from "hocs/layouts/Layout";
+import Layout from "../../hocs/layouts/Layout";
+import React, { useEffect /* useState */ } from "react";
+
 function Contacto() {
+  useEffect(() => {
+    // Esta función se ejecuta al cargar el componente
+    document.title = "Contacto | AR Puzzle";
+  }, []);
+
   return (
     <Layout>
-      <div className="bg-black bg-dot-white/[0.25] relative flex flex-col items-center justify-center">
-        {/* Radial gradient for the container to give a faded look */}
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="relative px-6 lg:px-8">
+        <div className="mx-auto max-w-xl lg:max-w-5xl pt-12 lg:pt-12">
+          <h1 className="text-3xl text-white font-bold tracking-tight text-center lg:text-6xl">
+            Gracias por su interés en este proyecto
+          </h1>
+          <p className="mt-6 text-lg pt-6 text-white text-center">
+            Si tienes alguna pregunta, comentario o sugerencia no dude en
+            contactar con nosotros
+          </p>
+        </div>
+      </div>
 
-        <div className="relative px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
-            <div>
-              <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-                <div className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                  <span className="text-gray-600">
-                    Announcing our next round of funding.{" "}
-                    <a href="/" className="font-semibold text-orange-600">
-                      <span className="absolute inset-0" aria-hidden="true" />
-                      Read more <span aria-hidden="true">&rarr;</span>
-                    </a>
-                  </span>
-                </div>
-              </div>
-              <div>
-                <h1 className="text-4xl text-white font-bold tracking-tight sm:text-center sm:text-6xl">
-                  Data to enrich your online business
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                  occaecat fugiat aliqua.
-                </p>
-                <div className="mt-8 flex gap-x-4 sm:justify-center">
-                  <a
-                    href="/"
-                    className="inline-block rounded-lg bg-orange-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-orange-600 hover:bg-orange-700 hover:ring-orange-700"
-                  >
-                    Get started
-                    <span className="text-orange-200" aria-hidden="true">
-                      &rarr;
-                    </span>
-                  </a>
-                  <a
-                    href="/"
-                    className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-                  >
-                    Live demo
-                    <span className="text-gray-400" aria-hidden="true">
-                      &rarr;
-                    </span>
-                  </a>
-                </div>
-              </div>
-              <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-                <svg
-                  className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
-                  viewBox="0 0 1155 678"
-                  fill="none"
-                >
+      <div className="relative mx-auto max-w-2xl lg:max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-row justify-center w-full py-12 ">
+          <div className="grid h-20 w-20 card bg-base-100 rounded-box place-items-center">
+            <a
+              href="mailto:pablo.rodriguezgomez@alum.uca.es?subject=Consulta%20proyecto%20AR%20Puzzle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                width="75px"
+                height="75px"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
                   <path
-                    fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
-                    fillOpacity=".3"
-                    d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="ecb5b0c9-546c-4772-8c71-4d3f06d544bc"
-                      x1="1155.49"
-                      x2="-78.208"
-                      y1=".177"
-                      y2="474.645"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stopColor="#9089FC" />
-                      <stop offset={1} stopColor="#FF80B5" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </div>
+                    d="M2 11.9556C2 8.47078 2 6.7284 2.67818 5.39739C3.27473 4.22661 4.22661 3.27473 5.39739 2.67818C6.7284 2 8.47078 2 11.9556 2H20.0444C23.5292 2 25.2716 2 26.6026 2.67818C27.7734 3.27473 28.7253 4.22661 29.3218 5.39739C30 6.7284 30 8.47078 30 11.9556V20.0444C30 23.5292 30 25.2716 29.3218 26.6026C28.7253 27.7734 27.7734 28.7253 26.6026 29.3218C25.2716 30 23.5292 30 20.0444 30H11.9556C8.47078 30 6.7284 30 5.39739 29.3218C4.22661 28.7253 3.27473 27.7734 2.67818 26.6026C2 25.2716 2 23.5292 2 20.0444V11.9556Z"
+                    fill="white"
+                  ></path>{" "}
+                  <path
+                    d="M22.0515 8.52295L16.0644 13.1954L9.94043 8.52295V8.52421L9.94783 8.53053V15.0732L15.9954 19.8466L22.0515 15.2575V8.52295Z"
+                    fill="#EA4335"
+                  ></path>{" "}
+                  <path
+                    d="M23.6231 7.38639L22.0508 8.52292V15.2575L26.9983 11.459V9.17074C26.9983 9.17074 26.3978 5.90258 23.6231 7.38639Z"
+                    fill="#FBBC05"
+                  ></path>{" "}
+                  <path
+                    d="M22.0508 15.2575V23.9924H25.8428C25.8428 23.9924 26.9219 23.8813 26.9995 22.6513V11.459L22.0508 15.2575Z"
+                    fill="#34A853"
+                  ></path>{" "}
+                  <path
+                    d="M9.94811 24.0001V15.0732L9.94043 15.0669L9.94811 24.0001Z"
+                    fill="#C5221F"
+                  ></path>{" "}
+                  <path
+                    d="M9.94014 8.52404L8.37646 7.39382C5.60179 5.91001 5 9.17692 5 9.17692V11.4651L9.94014 15.0667V8.52404Z"
+                    fill="#C5221F"
+                  ></path>{" "}
+                  <path
+                    d="M9.94043 8.52441V15.0671L9.94811 15.0734V8.53073L9.94043 8.52441Z"
+                    fill="#C5221F"
+                  ></path>{" "}
+                  <path
+                    d="M5 11.4668V22.6591C5.07646 23.8904 6.15673 24.0003 6.15673 24.0003H9.94877L9.94014 15.0671L5 11.4668Z"
+                    fill="#4285F4"
+                  ></path>{" "}
+                </g>
+              </svg>
+            </a>
+          </div>
+          <div className="divider divider-horizontal"></div>
+          <div className="grid h-20 w-20 card bg-base-100 rounded-box place-items-center">
+            <a
+              href="https://www.linkedin.com/in/parogo/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="LinkedIn"
+                role="img"
+                viewBox="0 0 512 512"
+                fill="#ffffff"
+                width="64px"
+                height="64px"
+                stroke="#ffffff"
+              >
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  stroke="#CCCCCC"
+                  strokeWidth="8.192"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <rect width="512" height="512" rx="15%" fill="#0077b5"></rect>
+                  <circle cx="142" cy="138" r="37"></circle>
+                  <path
+                    stroke="#ffffff"
+                    strokeWidth="66"
+                    d="M244 194v198M142 194v198"
+                  ></path>
+                  <path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"></path>
+                </g>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

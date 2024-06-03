@@ -45,7 +45,8 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-
+    'apps.creador',
+    'apps.nivel',
 ]
 
 THIRD_PARTY_APPS = [
@@ -138,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'es'
-TIME_ZONE = 'UTC+2'
+TIME_ZONE = 'Europe/Madrid'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
