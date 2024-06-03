@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import logo_letras_AR_Puzzle from 'assets/img/LOGO_AR_PUZZLE_CON_LETRAS.png'
+import logo_letras_AR_Puzzle from '../../assets/img/LOGO_AR_PUZZLE_CON_LETRAS.png'
 import { useLocation } from 'react-router-dom'; // Asegúrate de tener react-router-dom instalado
 import { Link, NavLink } from 'react-router-dom';
 import {connect} from 'react-redux'
@@ -10,10 +10,10 @@ import {connect} from 'react-redux'
 const navigation = [
   { name: 'AR Puzzle', href: '/', current: true },
   { name: 'Comunidad', href: '/Comunidad', current: false },
-  { name: 'Desarrollo Futuro', href: '/Desarrollo_Futuro', current: false },
   { name: 'Foro', href: '/Foro', current: false },
-  { name: 'Contacto', href: '/Contacto', current: false },
   { name: 'Descarga', href: '/Descarga', current: false },
+  /* { name: 'Desarrollo Futuro', href: '/Desarrollo_Futuro', current: false }, */
+  { name: 'Contacto', href: '/Contacto', current: false },
 ]
 
 function classNames(...classes) {
@@ -32,7 +32,6 @@ function Navbar() {
         <Disclosure as="nav" className="bg-black-bg z-50">
         {({ open }) => (
             <>
-            {console.log(open)}
             <div className="mx-auto max-w-6xl px-2 lg:px-6 xl:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
@@ -67,7 +66,7 @@ function Navbar() {
                             to={item.href}
                             className={classNames(
                             isCurrent(item.href) ? 'bg-gray-900 font-semibold text-boton-naranja' : ' font-semibold text-gray-300 hover:bg-gray-700 hover:text-white',
-                            'rounded-md px-3 py-2 text-sm font-medium'
+                            'rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out'
                             )}
                             aria-current={isCurrent(item.href) ? 'page' : undefined}
                         >
@@ -150,8 +149,8 @@ function Navbar() {
                                     'block rounded-md px-3 py-2 text-base font-medium'
                                 )}
                                 aria-current={isCurrent(item.href) ? 'page' : undefined}
+
                                 onClick={async () => {
-                                    await fetch('/accept-terms', { method: 'POST' })
                                     close()
                                   }}
                                 >

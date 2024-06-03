@@ -52,8 +52,8 @@ const navigation = {
 
 function Footer(){
     return (
-    <footer className="bg-black-bg">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-0 flex flex-col items-center">
+    <footer className="bg-black-bg z-50">
+      <div className="max-w-7xl mx-auto pt-0 pb-12 px-4 sm:px-6 lg:px-0 flex flex-col items-center">
         <div className="mt-8 border-t border-gray-800 w-full pt-8">
           <p className="text-base text-gray-400 text-center">
             &copy; 2024 Pablo Rodríguez Gómez TFG. All rights reserved. 
