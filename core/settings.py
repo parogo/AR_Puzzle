@@ -150,8 +150,14 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public/dataBaseMedia')
+MEDIA_URL = '/public/dataBaseMedia/'
+
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'src/assets/dataBaseMedia')
+#MEDIA_URL = '/src/assets/dataBaseMedia/'
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')

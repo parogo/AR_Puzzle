@@ -4,7 +4,7 @@ from apps.creador.models import Creador
 
 
 def nivel_thumbnail_directory(instance, filename):
-    return 'nivel/{0}/{1}'.format(instance.title, filename)
+    return 'nivel/{0}/{1}'.format(instance.slug, filename)
 
 # Create your models here.
 class Nivel_Post(models.Model):
