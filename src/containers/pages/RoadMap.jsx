@@ -1,4 +1,4 @@
-import Layout from "hocs/layouts/Layout";
+import Layout from "../../hocs/layouts/Layout";
 
 function RoadMap() {
   return (

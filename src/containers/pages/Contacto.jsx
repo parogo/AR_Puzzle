@@ -4,12 +4,12 @@ import React, { useEffect /* useState */ } from "react";
 function Contacto() {
   useEffect(() => {
     // Esta función se ejecuta al cargar el componente
-    document.title = "Contacto | AR Puzzle";
+    document.title = "Contacto";
   }, []);
 
   return (
     <Layout>
-      <div className="relative px-6 lg:px-8">
+      <div className="relative px-6 lg:px-8 py-12">
         <div className="mx-auto max-w-xl lg:max-w-5xl pt-12 lg:pt-12">
           <h1 className="text-3xl text-white font-bold tracking-tight text-center lg:text-6xl">
             Gracias por su interés en este proyecto
@@ -22,8 +22,8 @@ function Contacto() {
       </div>
 
       <div className="relative mx-auto max-w-2xl lg:max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-row justify-center w-full py-12 ">
-          <div className="grid h-20 w-20 card bg-base-100 rounded-box place-items-center">
+        <div className="grid grid-cols-2 gap-14 justify-center w-full py-12 place-items-center">
+          <div className="grid h-20 w-20 card bg-base-100 rounded-box place-items-center lg:justify-self-end">
             <a
               href="mailto:pablo.rodriguezgomez@alum.uca.es?subject=Consulta%20proyecto%20AR%20Puzzle"
               target="_blank"
@@ -80,8 +80,8 @@ function Contacto() {
               </svg>
             </a>
           </div>
-          <div className="divider divider-horizontal"></div>
-          <div className="grid h-20 w-20 card bg-base-100 rounded-box place-items-center">
+
+          <div className="grid h-20 w-20 card bg-base-100 rounded-box place-items-center lg:justify-self-start">
             <a
               href="https://www.linkedin.com/in/parogo/"
               target="_blank"

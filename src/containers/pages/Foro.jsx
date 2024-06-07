@@ -4,7 +4,7 @@ import React, { useEffect /* useState */ } from "react";
 function Foro() {
   useEffect(() => {
     // Esta función se ejecuta al cargar el componente
-    document.title = "Foro | AR Puzzle";
+    document.title = "Foro";
   }, []);
 
   return (

@@ -19,7 +19,7 @@ export const get_lista_niveles = () => async dispatch => {
     };
     try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list`, config);
-        //console.log(res.status);
+        console.log(`${process.env.REACT_APP_API_URL}/api/nivel/list`);
         if(res.status === 200) {
             dispatch({
                 type: GET_LISTA_NIVELES_SUCCESS,
