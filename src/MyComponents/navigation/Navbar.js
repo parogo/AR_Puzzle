@@ -5,12 +5,13 @@ import logo_letras_AR_Puzzle from '../../assets/img/LOGO_AR_PUZZLE_CON_LETRAS.pn
 import { useLocation } from 'react-router-dom'; // Asegúrate de tener react-router-dom instalado
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
-
+import { logout } from "../../redux/actions/auth/auth";
+import { toast } from 'react-toastify';
 
 const navigation = [
     { name: 'AR Puzzle', href: '/', current: true },
     { name: 'Comunidad', href: '/Comunidad', current: false },
-    { name: 'Foro', href: '/Foro', current: false },
+    /* { name: 'Foro', href: '/Foro', current: false }, */
     { name: 'Descarga', href: '/Descarga', current: false },
     /* { name: 'Desarrollo Futuro', href: '/Desarrollo_Futuro', current: false }, */
     { name: 'Contacto', href: '/Contacto', current: false },
@@ -20,8 +21,24 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-function Navbar() {
+function Navbar({
+    isAuthenticated,
+    logout
+}) {
     const location = useLocation(); // Hook para obtener la ubicación actual
+
+    const handleLogout = () => {
+        toast.success("Sesión cerrada, esperamos volver a verle pronto", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+        });
+        logout();
+    };
 
     // Función para determinar si el enlace está activo
     function isCurrent(href) {
@@ -108,29 +125,51 @@ function Navbar() {
                                         leaveFrom="transform opacity-100 scale-100"
                                         leaveTo="transform opacity-0 scale-95"
                                     >
-                                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        /* Perfil */
-                                                        href="/"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Tu perfil
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        /* Cerrar sesión */
-                                                        href="/"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-red-500')}
-                                                    >
-                                                        Cerrar sesión
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
+                                        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            {isAuthenticated ? (
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <Link 
+                                                            to="/"
+                                                            onClick={handleLogout}
+                                                        >
+                                                            <button
+                                                                /* Perfil */
+                                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-red-500')}
+                                                            >
+                                                                Cerrar sesión
+                                                            </button>
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                            ) : (
+                                                <>
+                                                    <Menu.Item>
+                                                        {({ active }) => (
+                                                            <Link
+                                                                /* Cerrar sesión */
+                                                                to="/Login"
+                                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                            >
+                                                                Iniciar sesión
+                                                            </Link>
+                                                        )}
+                                                    </Menu.Item>
+                                                    <Menu.Item>
+                                                        {({ active }) => (
+                                                            <Link
+                                                                /* Cerrar sesión */
+                                                                to="/SingIn"
+                                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                            >
+                                                                Registrarse
+                                                            </Link>
+                                                        )}
+                                                    </Menu.Item>
+
+                                                </>
+
+                                            )}
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
@@ -176,15 +215,17 @@ function Navbar() {
                 </>
             )}
         </Disclosure>
+
+
     )
 }
 
 // Esto llamará a alguna variable de Redux que tengamos inicializada
 const mapStateToProps = state => ({
-
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 // Si llamamos alguna función de redux el export se tiene que hacer así 
 export default connect(mapStateToProps, {
-
+    logout
 })(Navbar)

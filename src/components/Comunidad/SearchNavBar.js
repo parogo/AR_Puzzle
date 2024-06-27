@@ -17,17 +17,20 @@ function SearchNavBar() {
         setTimeout(() => navigate("/Comunidad/" + term), 0.2);
         setTerm("");
     };
+    const handleRefresh = (e) => {
+        e.preventDefault(); // Evitar la navegación por defecto de React Router
+        window.location.href = "/Comunidad"; // Forzar la navegación y recarga completa de la página
+    };
 
     return (
         <div className="relative mx-auto lg:max-w-screen-lg pt-12 px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-1">
-                    <Link to={`/Comunidad`}>
+                    <Link to={`/Comunidad`} onClick={handleRefresh}>
                         <Button
-                            className={`${location.pathname === "/Comunidad"
-                                ? location.search
-                                    ? "text-gray-200"
-                                    : "text-boton-naranja"
+                            className={`${location.pathname.toLowerCase() === "/comunidad"
+                                ?
+                                "text-boton-naranja"
                                 : "text-gray-200"
                                 } py-2 px-4 bg-gray-900 hover:bg-gray-700 rounded-md justify-center`}
                         >
