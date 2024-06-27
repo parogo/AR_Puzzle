@@ -2,7 +2,7 @@ import tarjetas_pdf from "../../assets/descargas/Tarjetas_TFG.pdf";
 import logo_AR from "../../assets/img/Logo_AR.png";
 import imagen_descarga from "../../assets/img/boton_descarga.png";
 import Layout from "../../hocs/layouts/Layout";
-import React, { useEffect /* useState */ } from "react";
+import React, { useEffect } from "react";
 
 // Reemplaza con la ruta real de tu archivo
 

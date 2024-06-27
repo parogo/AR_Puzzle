@@ -3,8 +3,27 @@ from django.utils import timezone
 from apps.creador.models import Creador
 
 
+
 def nivel_thumbnail_directory(instance, filename):
     return 'nivel/{0}/{1}'.format(instance.slug, filename)
+
+class NivelManager(models.Manager):
+    def create_nivel(self, title, slug, thumbnail, json_nivel, creador):
+        if not title:
+            raise ValueError('El título es obligatorio')
+        if not slug:
+            raise ValueError('El slug es obligatorio')
+        if not thumbnail:
+            raise ValueError('La miniatura es obligatoria')
+        if not json_nivel:
+            raise ValueError('El json del nivel es obligatorio')
+        if not creador:
+            raise ValueError('El creador es obligatorio')
+        
+        nivel = self.create(title=title, slug=slug, thumbnail=thumbnail, json_nivel=json_nivel, creador=creador)
+        nivel.save()
+        
+        return nivel
 
 # Create your models here.
 class Nivel_Post(models.Model):
@@ -19,7 +38,10 @@ class Nivel_Post(models.Model):
 
     json_nivel =    models.TextField()
 
-    creador =       models.ForeignKey(Creador, on_delete=models.PROTECT)
+    creador =       models.ForeignKey(Creador, on_delete=models.CASCADE)
+    #creador =       models.ForeignKey(UserAccount, to_field='username', on_delete=models.CASCADE)
+
+    objects = NivelManager()
 
     class Meta:
         ordering = ('-published',)

@@ -20,10 +20,24 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import JsonResponse
+
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    return JsonResponse({'csrfToken': request.META.get('CSRF_COOKIE')})
+
 urlpatterns = [
+    path('auth/csrf/', get_csrf_token),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.jwt')),
+    #path('auth/', include('djoser.social.urls')),
 
     path('api/creador/', include('apps.creador.urls')),
     path('api/nivel/', include('apps.nivel.urls')),
+    path('api/nivelesDisponibles/', include('apps.nivelesDisponibles.urls')),
+    path('api/user/', include('apps.user.urls')),
 
 
     path('admin/', admin.site.urls),

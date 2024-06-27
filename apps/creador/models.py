@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class Creador(models.Model):
@@ -7,11 +8,11 @@ class Creador(models.Model):
         verbose_name_plural = 'Creadores'
 
     name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, unique=True)
+    slug = models.CharField(max_length=255, unique=True)
 
     views = models.IntegerField(default=0, blank=True)
 
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='children')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='creadores')
 
     def __str__(self):
         return self.name
