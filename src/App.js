@@ -40,12 +40,17 @@ function App({
 }) {
 
   useEffect(() => {
-    if(isAuthenticated !== true)
-      {refresh()
-        check_authenticated()
-        load_user()
+    const initAuth = async () => {
+      if (localStorage.getItem('refresh')) {
+        await refresh();
+        await check_authenticated();
+        if (isAuthenticated) {
+          await load_user();
+        }
       }
-  })
+    };
+    initAuth();
+  }, [isAuthenticated]);
 
   return (
 

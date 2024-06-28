@@ -7,7 +7,11 @@ import {
     GET_DETAILED_NIVEL_SUCCESS,
     GET_DETAILED_NIVEL_FAIL,
     GET_SEARCH_NIVEL_SUCCESS,
-    GET_SEARCH_NIVEL_FAIL
+    GET_SEARCH_NIVEL_FAIL,
+    CREATE_NIVEL_SUCCESS,
+    CREATE_NIVEL_FAIL,
+    DELETE_NIVEL_SUCCESS,
+    DELETE_NIVEL_FAIL
 }
     from './types';
 
@@ -199,3 +203,65 @@ export const get_search_nivel_page = (search_term, page) => async dispatch => {
         });
     }
 }
+
+export const create_nivel = (nivelData) => async dispatch => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `JWT ${localStorage.getItem('access')}`
+        }
+    };
+
+    const formData = new FormData();
+    for (const key in nivelData) {
+        formData.append(key, nivelData[key]);
+    }
+
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/nivel/create`, formData, config);
+        
+        if (res.status === 201) {
+            dispatch({
+                type: CREATE_NIVEL_SUCCESS,
+                payload: res.data
+            });
+        } else {
+            dispatch({
+                type: CREATE_NIVEL_FAIL
+            });
+        }
+    } catch (err) {
+        dispatch({
+            type: CREATE_NIVEL_FAIL
+        });
+    }
+};
+
+export const delete_nivel = (slug) => async dispatch => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `JWT ${localStorage.getItem('access')}`
+        }
+    };
+
+    try {
+        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/api/nivel/delete/${slug}`, config);
+        
+        if (res.status === 204) {
+            dispatch({
+                type: DELETE_NIVEL_SUCCESS,
+                payload: slug
+            });
+        } else {
+            dispatch({
+                type: DELETE_NIVEL_FAIL
+            });
+        }
+    } catch (err) {
+        dispatch({
+            type: DELETE_NIVEL_FAIL
+        });
+    }
+};

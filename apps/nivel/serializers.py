@@ -3,6 +3,8 @@ from .models import *
 from apps.creador.serializers import CreadorSerializer
 
 class NivelCreateSerializer(serializers.ModelSerializer):
+    #creador = CreadorSerializer()
+    creador = serializers.CharField()
     class Meta:
         model = Nivel_Post
         fields = [
@@ -13,23 +15,23 @@ class NivelCreateSerializer(serializers.ModelSerializer):
             'json_nivel',
             'creador'
         ]
+
     def create(self, validated_data):
-        nivel = Nivel_Post.objects.create(
-            title = validated_data['title'],
-            slug = validated_data['slug'],
-            thumbnail = validated_data['thumbnail'],
-            published = validated_data['published'],
-            json_nivel = validated_data['json_nivel'],
-            creador = validated_data['creador']
-        )
-        nivel.save()
-        return nivel
-    
-    def create(self, validated_data):
-        creador_data = validated_data.pop('creador')
-        creador_obj = Creador.objects.create(**creador_data)
-        nivel_obj = Nivel_Post.objects.create(**validated_data, creador=creador_obj)
-        nivel_obj.save()
+        creador_name = validated_data['creador']
+        print(creador_name)
+
+        try: 
+            creador = Creador.objects.get(name=creador_name)
+        except Creador.DoesNotExist:
+            raise serializers.ValidationError("Creador no encontrado")
+
+        nivel_obj = Nivel_Post.objects.create_nivel(
+                                                    title=validated_data['title'], 
+                                                    slug=validated_data['slug'],
+                                                    thumbnail=validated_data['thumbnail'],
+                                                    json_nivel=validated_data['json_nivel'],
+                                                    creador=creador)
+
         return nivel_obj
 
 class NivelSerializer(serializers.ModelSerializer):

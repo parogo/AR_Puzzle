@@ -21,8 +21,7 @@ function Login({ login, isAuthenticated, loading }) {
   const onClick = async (e) => {
     e.preventDefault();
     login(email, password);
-
-    console.log(isAuthenticated, loading);
+    //console.log(isAuthenticated, loading);
   };
 
   useEffect(() => {

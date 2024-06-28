@@ -6,7 +6,11 @@ import {
     GET_DETAILED_NIVEL_SUCCESS,
     GET_DETAILED_NIVEL_FAIL,
     GET_SEARCH_NIVEL_SUCCESS,
-    GET_SEARCH_NIVEL_FAIL
+    GET_SEARCH_NIVEL_FAIL,
+    CREATE_NIVEL_SUCCESS,
+    CREATE_NIVEL_FAIL,
+    DELETE_NIVEL_SUCCESS,
+    DELETE_NIVEL_FAIL
 }
  from '../actions/nivel/types';;
 
@@ -81,6 +85,24 @@ export default function nivel(state = initialState, action) {
                 count: null,
                 next: null,
                 previous: null
+            };
+        case CREATE_NIVEL_SUCCESS:
+            return {
+                ...state,
+                lista_niveles: state.lista_niveles ? [payload, ...state.lista_niveles] : [payload]
+            };
+        case CREATE_NIVEL_FAIL:
+            return {
+                ...state
+            };
+        case DELETE_NIVEL_SUCCESS:
+            return {
+                ...state,
+                lista_niveles: state.lista_niveles ? state.lista_niveles.filter(nivel => nivel.slug !== payload) : []
+            };
+        case DELETE_NIVEL_FAIL:
+            return {
+                ...state
             };
         default:
             return state;

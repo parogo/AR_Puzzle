@@ -13,7 +13,6 @@ function ResetPassword({ reset_password, isAuthenticated, loading }) {
 
   useEffect(() => {
     if (loading === true) {
-      console.log("UseEffect");
       toast.success("Le hemos enviado un correo para resetear su contraseña", {
         position: "top-right",
         autoClose: 5000,
@@ -34,7 +33,6 @@ function ResetPassword({ reset_password, isAuthenticated, loading }) {
 
   const onClick = async (e) => {
     e.preventDefault();
-    console.log(formData);
     reset_password(email);
     //Navigate("/password_reset_sent");
   };
