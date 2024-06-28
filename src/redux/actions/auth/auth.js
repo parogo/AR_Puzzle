@@ -224,7 +224,6 @@ export const check_authenticated = () => async dispatch => {
 
 export const refresh = () => async dispatch => {
     if (localStorage.getItem('refresh')) {
-        console.log("refresh")
 
         const config = {
             headers: {
@@ -258,7 +257,6 @@ export const refresh = () => async dispatch => {
         }
     }
     else {
-        console.log("no refresh")
         dispatch({
             type: REFRESH_FAIL
         });

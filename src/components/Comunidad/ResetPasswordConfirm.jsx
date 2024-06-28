@@ -66,7 +66,6 @@ function ResetPasswordConfirm({
       return; // Detiene la ejecución si las contraseñas no coinciden
     } else {
       console.log(formData);
-      console.log("Las contraseñas son iguales");
       reset_password_confirm(uid, token, new_password, re_new_password);
     }
   };

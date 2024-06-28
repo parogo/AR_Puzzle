@@ -21,14 +21,13 @@ class NivelManager(models.Manager):
             raise ValueError('El creador es obligatorio')
         
         nivel = self.create(title=title, slug=slug, thumbnail=thumbnail, json_nivel=json_nivel, creador=creador)
-        nivel.save()
         
         return nivel
 
 # Create your models here.
 class Nivel_Post(models.Model):
-    title =         models.CharField(max_length=255)
-    slug =          models.SlugField(max_length=255, unique=True)
+    title =         models.CharField(max_length=255, unique=True)
+    slug =          models.CharField(max_length=255, unique=True)
     thumbnail =     models.ImageField(upload_to=nivel_thumbnail_directory, max_length=500)
 
 

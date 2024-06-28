@@ -1,12 +1,18 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from .models import Nivel_Post, NivelManager, ViewCount
 from apps.creador.models import Creador
 
-from .serializers import NivelSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
+
+from .serializers import NivelCreateSerializer, NivelSerializer
 from .pagination import SetPagination
 
 from django.db.models import Q
@@ -17,7 +23,7 @@ class ListNivelesView(APIView):
 
     def get(self, request, format=None):
         if Nivel_Post.objects.all().exists():
-            niveles = Nivel_Post.objects.all()
+            niveles = Nivel_Post.objects.all().order_by('-views')
 
             paginator = SetPagination()
             results = paginator.paginate_queryset(niveles, request)
@@ -37,7 +43,7 @@ class ListNivelesByCreatorView(APIView):
             creador_slug = request.query_params.get('creador_slug', None)
             busqueda_por_creador = Creador.objects.get(slug=creador_slug)
 
-            niveles = Nivel_Post.objects.order_by('published').all()
+            niveles = Nivel_Post.objects.order_by('-views').all()
 
             niveles = niveles.filter(creador=busqueda_por_creador)
             
@@ -103,10 +109,44 @@ class SearchNivelView(APIView):
         matches = Nivel_Post.objects.filter(
             Q(title__icontains=search_term) | 
             Q(creador__name__icontains=search_term)
-        )
+        ).order_by('-views')
         
         paginator = SetPagination()
         results = paginator.paginate_queryset(matches, request)
         serializer = NivelSerializer(results, many=True)
 
-        return paginator.get_paginated_response({'niveles_filtrados': serializer.data})
+        return paginator.get_paginated_response({'niveles_filtrados': serializer.data}) 
+    
+class CreateNivelView(APIView):
+    #permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (JWTAuthentication,)
+    parser_classes = (MultiPartParser, FormParser)
+    
+    def post(self, request):
+        serializer = NivelCreateSerializer(data=request.data)
+        
+        if serializer.is_valid(raise_exception=True):
+            try:
+                nivel_creado = serializer.create(request.data)
+                
+                return Response(NivelCreateSerializer(nivel_creado).data, status=status.HTTP_201_CREATED)
+            except:
+                return Response({'error': 'no se pudo crear el nivel xD'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+class DeleteNivelView(APIView):
+    #permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (JWTAuthentication,)
+
+    def delete(self, request, slug, format=None):
+        nivel = get_object_or_404(Nivel_Post, slug=slug)
+        
+        # Verificar si el usuario autenticado es el creador del nivel
+        if request.user != nivel.creador.user:
+            return Response({'error': 'No tienes permiso para eliminar este nivel'}, status=status.HTTP_403_FORBIDDEN)
+        
+        nivel.delete()
+        return Response({'success': 'Nivel eliminado correctamente'}, status=status.HTTP_204_NO_CONTENT)

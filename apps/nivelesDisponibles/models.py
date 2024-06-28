@@ -5,20 +5,19 @@ from apps.nivel.models import Nivel_Post
 
 
 class NivelesDisponiblesManager(models.Manager):
-    def create_niveles_disponibles(self, creador, nivel):
-        if not creador:
+    def create_niveles_disponibles(self, user, nivel):
+        if not user:
             raise ValueError('El creador es obligatorio')
         if not nivel:
             raise ValueError('El nivel es obligatorio')
         
-        nivel_disponible = self.create(user=creador, nivel=nivel)
-        nivel_disponible.save()
+        nivel_disponible = self.create(user=user, nivel=nivel)
         
         return nivel_disponible
 
 # Create your models here.
 class NivelesDisponibles(models.Model):
-    id =    models.AutoField(primary_key=True)
+    #id =    models.AutoField(primary_key=True)
     user =  models.ForeignKey(Creador, on_delete=models.CASCADE)
     nivel = models.ForeignKey(Nivel_Post, on_delete=models.CASCADE)
 

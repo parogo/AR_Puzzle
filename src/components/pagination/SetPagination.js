@@ -15,7 +15,6 @@ function SetPagination({ list_page, list, count }) {
 
     const next_number = () => {
         if (currentPage !== Math.ceil(count / 8)) {
-            console.log("test");
             setCurrentPage(currentPage + 1);
             setActive(currentPage + 1);
             list_page(currentPage + 1);
@@ -25,7 +24,6 @@ function SetPagination({ list_page, list, count }) {
 
     const previous_number = () => {
         if (currentPage !== 1) {
-            console.log("test");
             setCurrentPage(currentPage - 1);
             setActive(currentPage - 1);
             list_page(currentPage - 1);

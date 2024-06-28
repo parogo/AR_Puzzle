@@ -24,7 +24,7 @@ const initialState = {
     usernameMessage: null,
     emailMessage: null,
     passwordMessage: null,
-    isAuthenticated: null,
+    isAuthenticated: false,
     isRegistered: null,
     user: null,
     loading: null,
@@ -141,7 +141,7 @@ export default function auth(state = initialState, action) {
                 access: null,
                 refresh: null,
                 isAuthenticated: false,
-                loading: false
+                loading: null
             };
         default:
             return state;
