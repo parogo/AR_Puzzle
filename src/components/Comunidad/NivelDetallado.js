@@ -39,6 +39,8 @@ function NivelDetallado({
 
     useEffect(() => {
         updateNivelDisponibleId();
+        //console.log(nivelesDisponibles);
+        //console.log(niveles);
     }, [updateNivelDisponibleId]);
 
     const handleNivelDisponible = async () => {
@@ -90,26 +92,31 @@ function NivelDetallado({
                     className="w-full h-60 object-cover"
                 />
                 <div className="p-4">
-                    <h3 className="text-lg font-bold text-gray-200">
-                        {niveles.title}
-                    </h3>
+                    
+                <h3 className="text-lg font-bold text-gray-200">
+                    {niveles.title}
+                </h3>
 
                     <p className="text-gray-300">
                         De{" "}
                         <Link
-                            to={`/Creador/${niveles.creador.slug}`}
-                            className="text-boton-naranja"
+                            to={`/Creador/${niveles.creador}`}
+                            className="text-boton-naranja font-bold"
                         >
                             {" "}
-                            {niveles.creador.name}
+                            {niveles.creador}
                         </Link>
                     </p>
 
-                    <Link to={`/Nivel/${niveles.slug}`}>
-                        <Button className="mt-4 w-full bg-orange-500 text-white hover:bg-orange-600">
-                            Ver en detalle
-                        </Button>
-                    </Link>
+                    <p className="text-gray-300">
+                        Visitas: {" "}
+                        <span className="text-boton-naranja">{niveles.views}</span>
+                    </p>
+
+                    <p className="text-gray-300">
+                        Likes: {" "}
+                        <span className="text-boton-naranja">{niveles.likes}</span>
+                    </p>
 
                     <Button 
                         onClick={handleNivelDisponible}

@@ -35,7 +35,7 @@ class NivelCreateSerializer(serializers.ModelSerializer):
         return nivel_obj
 
 class NivelSerializer(serializers.ModelSerializer):
-    creador = CreadorSerializer()
+    creador = serializers.CharField()
     class Meta:
         model = Nivel_Post
         fields = [
@@ -44,6 +44,7 @@ class NivelSerializer(serializers.ModelSerializer):
             'slug',
             'thumbnail',
             'published',
+            'likes',
             'views',
             'json_nivel',
             'creador'

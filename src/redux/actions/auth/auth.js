@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 import {
     LOGIN_SUCCESS,
@@ -21,17 +20,7 @@ import {
     USER_LOADED_FAIL
 } from './types';
 
-/* const getCsrfToken = () => {
-    const name = 'csrftoken';
-    const cookieValue = document.cookie.split('; ').find(row => row.startsWith(name)).split('=')[1];
-    return cookieValue;
-}; */
-
 // Función para obtener el token CSRF
-export const getCsrfToken = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/csrf/`, { withCredentials: true });
-    Cookies.set('csrftoken', response.data.csrfToken);
-};
 
 export const load_user = () => async dispatch => {
     if (localStorage.getItem('access')) {
@@ -39,12 +28,14 @@ export const load_user = () => async dispatch => {
         const config = {
             headers: {
                 'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'ngrok-skip-browser-warning': '8000',
                 'Accept': 'application/json',
             }
         };
 
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config);
+            //const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config);
+            const res = await axios.get(`${localStorage.getItem('API_URL')}/auth/users/me/`, config);
 
             if (res.status === 200) {
                 dispatch({
@@ -77,7 +68,8 @@ export const login = (email, password) => async dispatch => {
 
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
 
@@ -87,8 +79,8 @@ export const login = (email, password) => async dispatch => {
     });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create`, body, config);
-
+        //const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create`, body, config);
+        const res = await axios.post(`${localStorage.getItem('API_URL')}/auth/jwt/create`, body, config);
         if (res.status === 200) {
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -123,19 +115,11 @@ export const register = (email, username, first_name, last_name, password, re_pa
         type: SET_AUTH_LOADING
     });
 
-    //await getCsrfToken();
-
-    /* const csrfToken = getCsrfToken();
-    console.log("csrfToken")
-    console.log(csrfToken) */
-    //console.log("Cookies.get('csrftoken')")
 
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            //'X-CSRFToken': csrfToken
-            //'X-CSRFToken': Cookies.get('csrftoken'),
-            //'X-CSRFToken': Cookies.get('csrftoken'),
+            'ngrok-skip-browser-warning': '8000',
         },
         withCredentials: true,
     };
@@ -150,7 +134,9 @@ export const register = (email, username, first_name, last_name, password, re_pa
     });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/register`, body, config);
+        //const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/register`, body, config);
+        const res = await axios.post(`${localStorage.getItem('API_URL')}/api/user/register`, body, config);
+
         if (res.status === 201) {
             dispatch({
                 type: REGISTER_SUCCESS,
@@ -188,6 +174,7 @@ export const check_authenticated = () => async dispatch => {
             headers: {
                 'Access': 'application/json',
                 'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': '8000',
             }
         };
 
@@ -197,7 +184,8 @@ export const check_authenticated = () => async dispatch => {
 
         try {
 
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/verify`, body, config);
+            //const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/verify`, body, config);
+            const res = await axios.post(`${localStorage.getItem('API_URL')}/auth/jwt/verify`, body, config);
 
             if (res.status === 200) {
                 dispatch({
@@ -229,6 +217,7 @@ export const refresh = () => async dispatch => {
             headers: {
                 'Access': 'application/json',
                 'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': '8000',
             }
         };
 
@@ -237,7 +226,8 @@ export const refresh = () => async dispatch => {
         });
 
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/refresh`, body, config);
+            //const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/refresh`, body, config);
+            const res = await axios.post(`${localStorage.getItem('API_URL')}/auth/jwt/refresh`, body, config);
 
             if (res.status === 200) {
                 dispatch({
@@ -270,14 +260,16 @@ export const reset_password = (email) => async dispatch => {
 
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '8000',
         }
     };
 
     const body = JSON.stringify({ email });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password/`, body, config);
+        //const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password/`, body, config);
+        const res = await axios.post(`${localStorage.getItem('API_URL')}/auth/users/reset_password/`, body, config);
 
         if (res.status === 204) {
             dispatch({
@@ -313,7 +305,8 @@ export const reset_password_confirm = (uid, token, new_password, re_new_password
 
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '8000',
         }
     };
 
@@ -334,7 +327,8 @@ export const reset_password_confirm = (uid, token, new_password, re_new_password
     }
     else {
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password_confirm/`, body, config);
+            //const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password_confirm/`, body, config);
+            const res = await axios.post(`${localStorage.getItem('API_URL')}/auth/users/reset_password_confirm/`, body, config);
 
             if (res.status === 204) {
                 dispatch({

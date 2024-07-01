@@ -18,12 +18,19 @@ import {
 export const get_lista_niveles = () => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list`, config);
+        //console.log("--- Intento obtener lista niveles ---")
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list`, config);
+        //console.log(`${localStorage.getItem('API_URL')}/api/nivel/list`)
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/list`, config);
+        //console.log("--- Consigo obtener lista niveles ---")
         //console.log(`${process.env.REACT_APP_API_URL}/api/nivel/list`);
+        //console.log(res.status);
+        //console.log(res.data)
         if (res.status === 200) {
             dispatch({
                 type: GET_LISTA_NIVELES_SUCCESS,
@@ -45,11 +52,13 @@ export const get_lista_niveles = () => async dispatch => {
 export const get_lista_niveles_page = (page) => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list?p=${page}`, config);
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list?p=${page}`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/list?p=${page}`, config);
         //console.log(res.status);
         if (res.status === 200) {
             dispatch({
@@ -72,11 +81,13 @@ export const get_lista_niveles_page = (page) => async dispatch => {
 export const get_lista_niveles_by_creador = (slug) => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list/creator?creador_slug=${slug}`, config);
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list/creator?creador_slug=${slug}`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/list/creator?creador_slug=${slug}`, config);
         //console.log(res.status);
         if (res.status === 200) {
             dispatch({
@@ -99,11 +110,14 @@ export const get_lista_niveles_by_creador = (slug) => async dispatch => {
 export const get_lista_niveles_by_creador_page = (slug, page) => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list/creator?creador_slug=${slug}&p=${page}`, config);
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/list/creator?creador_slug=${slug}&p=${page}`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/list/creator?creador_slug=${slug}&p=${page}`, config);
+        
         //console.log(res.status);
         if (res.status === 200) {
             dispatch({
@@ -126,11 +140,14 @@ export const get_lista_niveles_by_creador_page = (slug, page) => async dispatch 
 export const get_detailed_nivel = (slug_nivel) => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/detail/${slug_nivel}`, config);
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/detail/${slug_nivel}`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/detail/${slug_nivel}`, config);
+        
         //console.log(res.status);
         if (res.status === 200) {
             dispatch({
@@ -153,11 +170,14 @@ export const get_detailed_nivel = (slug_nivel) => async dispatch => {
 export const get_search_nivel = (search_term) => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/search?s=${search_term}`, config);
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/search?s=${search_term}`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/search?s=${search_term}`, config);
+        
         //console.log(res.status);
         if (res.status === 200) {
             dispatch({
@@ -180,11 +200,14 @@ export const get_search_nivel = (search_term) => async dispatch => {
 export const get_search_nivel_page = (search_term, page) => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/search?p=${page}&s=${search_term}`, config);
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivel/search?p=${page}&s=${search_term}`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/search?p=${page}&s=${search_term}`, config);
+        
         //console.log(res.status);
         if (res.status === 200) {
             dispatch({
@@ -209,6 +232,7 @@ export const create_nivel = (nivelData) => async dispatch => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '8000',
             'Authorization': `JWT ${localStorage.getItem('access')}`
         }
     };
@@ -219,7 +243,8 @@ export const create_nivel = (nivelData) => async dispatch => {
     }
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/nivel/create`, formData, config);
+        //const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/nivel/create`, formData, config);
+        const res = await axios.post(`${localStorage.getItem('API_URL')}/api/nivel/create`, formData, config);
         
         if (res.status === 201) {
             dispatch({
@@ -242,12 +267,14 @@ export const delete_nivel = (slug) => async dispatch => {
     const config = {
         headers: {
             'Accept': 'application/json',
-            'Authorization': `JWT ${localStorage.getItem('access')}`
+            'Authorization': `JWT ${localStorage.getItem('access')}`,
+            'ngrok-skip-browser-warning': '8000'
         }
     };
 
     try {
-        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/api/nivel/delete/${slug}`, config);
+        //const res = await axios.delete(`${process.env.REACT_APP_API_URL}/api/nivel/delete/${slug}`, config);
+        const res = await axios.delete(`${localStorage.getItem('API_URL')}/api/nivel/delete/${slug}`, config);
         
         if (res.status === 204) {
             dispatch({

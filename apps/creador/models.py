@@ -10,6 +10,8 @@ class Creador(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.CharField(max_length=255, unique=True)
 
+    likes = models.IntegerField(default=0, blank=True)
+
     views = models.IntegerField(default=0, blank=True)
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='creadores')
@@ -23,6 +25,13 @@ class Creador(models.Model):
     
 class ViewCount(models.Model):
     creador = models.ForeignKey(Creador, on_delete=models.CASCADE, related_name='creador_view_count')
+    ip_address = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'{self.ip_address}'
+    
+class LikeCount(models.Model):
+    creador = models.ForeignKey(Creador, on_delete=models.CASCADE, related_name='creador_like_count')
     ip_address = models.CharField(max_length=255)
 
     def __str__(self):
