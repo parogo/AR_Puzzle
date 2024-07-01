@@ -13,13 +13,17 @@ export const get_lista_niveles_disponibles = (username) => async dispatch => {
     const config = {
         headers: {
             'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000',
             'Authorization': `JWT ${localStorage.getItem('access')}`
         }
     };
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivelesDisponibles/list/${username}`, config);
-        
+        //console.log("--- username ---")
+        //console.log(username)
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/nivelesDisponibles/list/${username}`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/nivelesDisponibles/list/${username}`, config);
+        //console.log("--- hola ---")
         dispatch({
             type: GET_LISTA_NIVELES_DISPONIBLES_SUCCESS,
             payload: res.data
@@ -37,6 +41,7 @@ export const create_nivel_disponible = (user, nivel) => async dispatch => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '8000',
             'Authorization': `JWT ${localStorage.getItem('access')}`
         }
     };
@@ -47,12 +52,22 @@ export const create_nivel_disponible = (user, nivel) => async dispatch => {
      });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/nivelesDisponibles/create`, body, config);
-        
+        //const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/nivelesDisponibles/create`, body, config);
+        const res = await axios.post(`${localStorage.getItem('API_URL')}/api/nivelesDisponibles/create`, body, config);
+        //console.log("Creando nivel disponible")
         dispatch({
             type: CREATE_NIVEL_DISPONIBLE_SUCCESS,
             payload: res.data
         });
+
+        
+        try{
+            await axios.get(`${localStorage.getItem('API_URL')}/api/nivel/detail/${nivel}`, config);
+        }
+        catch (error) {
+            console.error("Error al añadir visita al nivel:", error);
+        }
+
     } catch (err) {
         dispatch({
             type: CREATE_NIVEL_DISPONIBLE_FAIL
@@ -65,12 +80,14 @@ export const delete_nivel_disponible = (id_relacion) => async dispatch => {
     const config = {
         headers: {
             'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000',
             'Authorization': `JWT ${localStorage.getItem('access')}`
         }
     };
 
     try {
-        await axios.delete(`${process.env.REACT_APP_API_URL}/api/nivelesDisponibles/delete/${id_relacion}`, config);
+        //await axios.delete(`${process.env.REACT_APP_API_URL}/api/nivelesDisponibles/delete/${id_relacion}`, config);
+        await axios.delete(`${localStorage.getItem('API_URL')}/api/nivelesDisponibles/delete/${id_relacion}`, config);
         
         dispatch({
             type: DELETE_NIVEL_DISPONIBLE_SUCCESS,

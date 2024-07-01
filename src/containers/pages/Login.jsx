@@ -25,7 +25,14 @@ function Login({ login, isAuthenticated, loading }) {
   };
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // para un desplazamiento suave
+    });
     document.title = "Login";
+  }, []);
+
+  useEffect(() => {
     if (isAuthenticated === false && loading === false) {
       toast.error(
         "Error iniciando sesión, comprueba el correo y la contraseña",
@@ -43,6 +50,15 @@ function Login({ login, isAuthenticated, loading }) {
   }, [isAuthenticated, loading]);
 
   if (isAuthenticated) {
+    toast.success("Bienvenido", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
     return <Navigate to="/" />;
   }
 

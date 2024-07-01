@@ -24,7 +24,7 @@ function ResetPasswordConfirm({
     }
 
     if (isPasswordChanged === false) {
-      console.log("La nueva contraseña no es lo suficientemente segura");
+      //console.log("La nueva contraseña no es lo suficientemente segura");
       toast.error("La nueva contraseña no es lo suficientemente segura", {
         position: "bottom-center",
         autoClose: 5000,
@@ -50,10 +50,10 @@ function ResetPasswordConfirm({
   const onClick = async (e) => {
     e.preventDefault();
 
-    console.log(new_password);
-    console.log(re_new_password);
+    //console.log(new_password);
+    //console.log(re_new_password);
     if (new_password !== re_new_password) {
-      console.log("Las contraseñas no son iguales");
+      //console.log("Las contraseñas no son iguales");
       toast.error("Las contraseñas deben ser iguales", {
         position: "bottom-center",
         autoClose: 5000,
@@ -65,7 +65,7 @@ function ResetPasswordConfirm({
       });
       return; // Detiene la ejecución si las contraseñas no coinciden
     } else {
-      console.log(formData);
+      //console.log(formData);
       reset_password_confirm(uid, token, new_password, re_new_password);
     }
   };

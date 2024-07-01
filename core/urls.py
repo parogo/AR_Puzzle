@@ -28,6 +28,7 @@ def get_csrf_token(request):
     return JsonResponse({'csrfToken': request.META.get('CSRF_COOKIE')})
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('auth/csrf/', get_csrf_token),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),

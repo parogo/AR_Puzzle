@@ -11,6 +11,10 @@ function ArPuzzleHome() {
   useEffect(() => {
     // Esta función se ejecuta al cargar el componente
     document.title = "AR Puzzle";
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // para un desplazamiento suave
+    });
   }, []);
 
   return (

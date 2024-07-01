@@ -1,3 +1,4 @@
+import ArPuzzleAPK from "../../assets/descargas/AR_Puzzle.apk";
 import tarjetas_pdf from "../../assets/descargas/Tarjetas_TFG.pdf";
 import logo_AR from "../../assets/img/Logo_AR.png";
 import imagen_descarga from "../../assets/img/boton_descarga.png";
@@ -10,6 +11,10 @@ function Descarga() {
   useEffect(() => {
     // Esta función se ejecuta al cargar el componente
     document.title = "Descarga";
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // para un desplazamiento suave
+    });
   }, []);
 
   const handleDownload = (fileUrl, fileName) => {
@@ -45,7 +50,7 @@ function Descarga() {
               src={logo_AR}
               alt="Descarga"
               className="w-40 h-auto cursor-pointer"
-              onClick={() => handleDownload(tarjetas_pdf, "Tarjetas_TFG.pdf")}
+              onClick={() => handleDownload(ArPuzzleAPK, "AR_Puzzle.apk")}
               // Cambiar el archivo por la apk del juego
             />
           </div>
@@ -73,6 +78,8 @@ function Descarga() {
                 <br></br>
                 <br></br>
                 ¡Estás a solo un paso de empezar a jugar!
+                <br></br>
+                Haz click en la imagen
               </p>
             </div>
 

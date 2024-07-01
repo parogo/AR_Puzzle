@@ -8,11 +8,14 @@ import {
 export const get_creadores = () => async dispatch => {
     const config = {
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': '8000'
         }
     };
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/creador/list`, config);
+        //const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/creador/list`, config);
+        const res = await axios.get(`${localStorage.getItem('API_URL')}/api/creador/list`, config);
+
         //console.log(res.status);
         if(res.status === 200) {
             dispatch({

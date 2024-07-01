@@ -3,16 +3,22 @@ import store from './store';
 import { Provider } from "react-redux";
 
 import Error404 from "./containers/errors/Error404";
+
 import Login from "./containers/pages/Login";
 import ResetPassword from "./containers/pages/ResetPassword";
 import ResetPasswordConfirm from "./components/Comunidad/ResetPasswordConfirm";
 import ResetPasswordFinished from "./components/Comunidad/ResetPasswordFinished";
 import SingIn from "./containers/pages/SingIn";
+
 import ArPuzzleHome from "./containers/pages/ArPuzzleHome";
 import Comunidad from "./containers/pages/Comunidad";
 import Creador from "./containers/pages/Comunidad_Creador";
 import NivelDetallado from "./containers/pages/Comunidad_NivelDetallado";
 import NivelesFiltrados from "./containers/pages/Comunidad_Search";
+import MisNiveles from "./containers/pages/MisNiveles";
+import ListNivelesDisponibles from "./containers/pages/ListNivelesDisponibles";
+
+
 /* import RoadMap from "./containers/pages/RoadMap"; */
 import Foro from "./containers/pages/Foro";
 import Contacto from "./containers/pages/Contacto";
@@ -24,7 +30,7 @@ import Footer from "./MyComponents/navigation/Footer";
 import { ToastContainer } from "react-toastify";
 
 import { connect } from "react-redux"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { check_authenticated, load_user, refresh } from "./redux/actions/auth/auth"
 
 
@@ -39,7 +45,16 @@ function App({
   user
 }) {
 
-  useEffect(() => {
+  useEffect (() => {
+    //console.log(`${process.env.REACT_APP_API_URL}`)
+    localStorage.setItem('API_URL', 'https://cricket-cheerful-tetra.ngrok-free.app');
+    //localStorage.setItem('API_URL', 'http://localhost:8000');
+    //console.log('API_URL');
+    //console.log(localStorage.getItem('API_URL'));
+    //process.env.REACT_APP_API_URL = 'https://9809-84-122-138-78.ngrok-free.app'
+  }, [])
+
+/*   useEffect(() => {
     const initAuth = async () => {
       if (localStorage.getItem('refresh')) {
         await refresh();
@@ -50,7 +65,22 @@ function App({
       }
     };
     initAuth();
-  }, [isAuthenticated]);
+  }, [isAuthenticated]); */
+
+  const initAuth = useCallback(async () => {
+    //console.log("Entramos a initAuth")
+    if (localStorage.getItem('refresh')) {
+      await refresh();
+      await check_authenticated();
+      if (isAuthenticated) {
+        await load_user();
+      }
+    }
+  }, [refresh, check_authenticated, load_user, isAuthenticated]);
+
+  useEffect(() => {
+    initAuth();
+  }, [initAuth]);
 
   return (
 
@@ -84,6 +114,8 @@ function App({
             <Route path="/Nivel/:slug" element={<NivelDetallado />} />
             <Route path="/Comunidad" element={<Comunidad />} />
             <Route path="/Comunidad/:term" element={<NivelesFiltrados />} />
+            <Route path="/MisNiveles" element={<MisNiveles />} />
+            <Route path="/NivelesDisponibles" element={<ListNivelesDisponibles />} />
             {/* <Route path="/Desarrollo_Futuro" element={<RoadMap/>}/> */}
             <Route path="/Foro" element={<Foro />} />
             <Route path="/Contacto" element={<Contacto />} />

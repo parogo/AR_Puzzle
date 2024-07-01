@@ -33,6 +33,7 @@ class Nivel_Post(models.Model):
 
     published =     models.DateTimeField(default=timezone.now)
 
+    likes =         models.IntegerField(default=0, blank=True)
     views =         models.IntegerField(default=0, blank=True)
 
     json_nivel =    models.TextField()
@@ -54,6 +55,13 @@ class Nivel_Post(models.Model):
     
 class ViewCount(models.Model):
     nivel = models.ForeignKey(Nivel_Post, on_delete=models.CASCADE, related_name='nivelpost_view_count')
+    ip_address = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'{self.ip_address}'
+    
+class LikeCount(models.Model):
+    nivel = models.ForeignKey(Nivel_Post, on_delete=models.CASCADE, related_name='nivelpost_like_count')
     ip_address = models.CharField(max_length=255)
 
     def __str__(self):

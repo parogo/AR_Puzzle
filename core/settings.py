@@ -15,9 +15,18 @@ import os
 import environ
 from datetime import timedelta
 from corsheaders.defaults import default_headers
+from django.core.exceptions import ImproperlyConfigured
+
 
 env = environ.Env()
 environ.Env.read_env()
+
+def get_env_value(env_variable):
+    try:
+        return os.environ[env_variable]
+    except KeyError:
+        error_msg = f'Set the {env_variable} environment variable'
+        raise ImproperlyConfigured(error_msg)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +44,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
+
 
 
 # Application definition
@@ -233,10 +243,7 @@ DJOSER = {
 AUTH_USER_MODEL = 'user.UserAccount'
 
 CORS_ALLOWED_ORIGINS = env.list('CORS_ORIGIN_WHITELIST_DEV')
-""" CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000'
-] """
+
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'Authorization',
@@ -244,16 +251,15 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'Access-Control-Allow-Origin',
     'Access',
     'Content-Type',
+    'ngrok-skip-browser-warning',
     # otros encabezados necesarios
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
+# Durante el desarrollo, permite todos los orígenes
+CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS  = env.list('CSRF_TRUSTED_ORIGINS_DEV')
-""" CSRF_TRUSTED_ORIGINS  = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000'
-] """
 
 CSRF_COOKIE_NAME = "csrftoken"
 CSRF_COOKIE_SAMESITE = 'Lax'
